@@ -91,8 +91,11 @@ const prodConfig = {
       inject: 'head'
     }),
     new MiniCssExtractPlugin({}),
-    new CopyPlugin([
-    ])
+    new CopyPlugin({
+      patterns: [
+        { from: 'assets', to: 'assets' }
+      ]
+    })
   ]
 };
 
