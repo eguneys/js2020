@@ -16,7 +16,10 @@ export default function Graphics(canvas, sprites) {
 
 
   this.sspr = (sx, sy, sw, sh, dx, dy, dw = sw, dh = sh) => {
-    
+
+    dx = Math.floor(dx);
+    dy = Math.floor(dy);
+
     ctx.drawImage(sprites, 
                   sx,
                   sy,
