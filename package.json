@@ -8,7 +8,7 @@
     "build": "webpack --config webpack.config.js --env=production",
     "build-dev": "webpack --config webpack.config.js",
     "zip": "cd dist && zip dist.zip * -r && mv dist.zip ..",
-    "dist": "yarn run build && yarn run zip"
+    "dist": "rm dist -rf && yarn run build && yarn run zip"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",

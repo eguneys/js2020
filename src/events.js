@@ -1,6 +1,6 @@
 export default function Events() {
 
-  let allKeys = ['up', 'left', 'right', 'down', 'x', 'c'];
+  let allKeys = ['up', 'left', 'right', 'down', 'x', 'c', 'enter'];
 
   this.p = {};
 
@@ -45,6 +45,8 @@ export default function Events() {
     case 'KeyC':
       pressKey('c');
       break;
+    case 'Enter':
+      pressKey('enter');
     }
   };
 
@@ -68,6 +70,8 @@ export default function Events() {
     case 'KeyC':
       releaseKey('c');
       break;
+    case 'Enter':
+      releaseKey('enter');
     }    
   };
 

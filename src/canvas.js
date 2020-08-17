@@ -13,10 +13,25 @@ export default function Canvas(element) {
 
   resizeDisplay(element, canvas);
 
+  const fontCanvas = document.createElement('canvas');
+
+  this.fontCtx = fontCanvas.getContext('2d');
+
+  this.fontCtx.imageSmoothingEnabled = false;
+
+  fontCanvas.width = 1600;
+  fontCanvas.height = 900;
+
+  element.appendChild(fontCanvas);
+
+  resizeDisplay(element, fontCanvas);
+
   window
     .addEventListener('resize', 
-                      () => 
-                      resizeDisplay(element, canvas));
+                      () => {
+                        resizeDisplay(element, canvas);
+                        resizeDisplay(element, fontCanvas);
+                      });
 }
 
 function resizeDisplay(element, canvas) {

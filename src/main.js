@@ -20,12 +20,16 @@ export function app(element, options) {
       let graphics = new Graphics(canvas, 
                                   sprites);
 
+      graphics.font('Arial', 16 * 5);
+
       let ctx = {
         g: graphics,
         e: events
       };
 
       let play = new Play(ctx);
+
+      play.init();
 
       new Loop(() => {
 
