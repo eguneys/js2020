@@ -2,16 +2,14 @@ export default function Canvas(element) {
 
   const canvas = document.createElement('canvas');
 
-  this.ctx = canvas.getContext('2d');
-
-  this.ctx.imageSmoothingEnabled = false;
+  let ctx = this.ctx = canvas.getContext('2d');
 
   canvas.width = this.width = 320;
   canvas.height = this.height = 180;
 
   element.appendChild(canvas);
 
-  resizeDisplay(element, canvas);
+  resizeDisplay(element, canvas, ctx);
 
   const fontCanvas = document.createElement('canvas');
 
@@ -24,17 +22,17 @@ export default function Canvas(element) {
 
   element.appendChild(fontCanvas);
 
-  resizeDisplay(element, fontCanvas);
+  resizeDisplay(element, fontCanvas, this.fontCtx);
 
   window
     .addEventListener('resize', 
                       () => {
-                        resizeDisplay(element, canvas);
-                        resizeDisplay(element, fontCanvas);
+                        resizeDisplay(element, canvas, ctx);
+                        resizeDisplay(element, fontCanvas, this.fontCtx);
                       });
 }
 
-function resizeDisplay(element, canvas) {
+function resizeDisplay(element, canvas, ctx) {
   const bounds = element
         .getBoundingClientRect();
 
@@ -50,4 +48,6 @@ function resizeDisplay(element, canvas) {
 
   canvas.style.width = desiredWidth + 'px';
   canvas.style.height = desiredHeight + 'px';
+
+  ctx.imageSmoothingEnabled = false;
 }

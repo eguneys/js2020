@@ -20,6 +20,10 @@ export default function Graphics(canvas, sprites) {
     ctx.clearRect(0, 0, 320, 180);
   };
 
+  this.clearfont = (x, y, w, h) => {
+    fontCtx.clearRect(x * 5, y * 5, w * 5, h * 5);
+  };
+
   this.fr = (x, y, w, h) => {
     ctx.fillRect(x, y, w, h);
   };

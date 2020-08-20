@@ -83,6 +83,8 @@ export default function Board(play, ctx) {
 
   let { g, e } = ctx;
 
+  let freeze;
+
   let blocks;
 
   let cursor;
@@ -90,6 +92,8 @@ export default function Board(play, ctx) {
   let moveStats;
 
   this.init = (levels) => {
+
+    freeze = false;
 
     blocks = [];
     cursor = {
@@ -210,6 +214,11 @@ export default function Board(play, ctx) {
   };
 
   this.update = () => {
+
+    if (freeze) {
+      return;
+    }
+
     cursor.s++;
 
     if (cursor.block.addXTimer == 0 &&
@@ -262,6 +271,7 @@ export default function Board(play, ctx) {
     if (cursor.block.t === singleBlock &&
         cursor.block.x === 5 &&
         cursor.block.y === 3) {
+      freeze = true;
       play.nextLevel();
     }
 
