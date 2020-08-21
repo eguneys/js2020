@@ -4,7 +4,6 @@ export default function Levels() {
   let level;
 
   this.maxLevel = mapData.length - 1;
-  this.maxLevel = 0;
 
   this.level = i => {
     i = mapData.length - i - 1;
@@ -23,9 +22,9 @@ export default function Levels() {
 }
 
 const maxMoves = [
-  1,
-  1,
-  1,
+  45,
+  74,
+  45,
   57,
   19,
   12,

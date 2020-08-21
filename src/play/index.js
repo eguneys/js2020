@@ -51,6 +51,7 @@ export default function Play(ctx) {
 
   this.beginLevels = () => {
     level = 0;
+    levels.level(level);
     transition.init(() => {
       scene = board;
     });
@@ -71,6 +72,7 @@ export default function Play(ctx) {
 
   this.resetLevels = () => {
     level = 0;
+    levels.level(level);
     transition.init(() => {
       scene = board;
     });
