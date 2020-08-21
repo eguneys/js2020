@@ -83,7 +83,7 @@ export default function Board(play, ctx) {
 
   let { g, e } = ctx;
 
-  let freeze;
+  let freeze = true;
 
   let blocks;
 

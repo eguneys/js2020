@@ -3,6 +3,9 @@ export default function Levels() {
 
   let level;
 
+  this.maxLevel = mapData.length - 1;
+  this.maxLevel = 0;
+
   this.level = i => {
     i = mapData.length - i - 1;
     level =

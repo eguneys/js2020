@@ -1,9 +1,14 @@
 export default function Transition(play, ctx) {
 
   let { g } = ctx;
+
+  let ct;
   
   const onTransition = () => {
     this.onTransition();
+    if (ct) {
+      ct();
+    }
   };
 
   let timer = 0;
@@ -14,7 +19,8 @@ export default function Transition(play, ctx) {
     return timer === 0;
   };
 
-  this.init = () => {
+  this.init = (_ct) => {
+    ct = _ct;
     timer = 20;
     x = 0;
     w = 0;

@@ -2,6 +2,8 @@ import Menu from './menu';
 import Levels from './levels';
 import Board from './board';
 import Transition from './transition';
+import EndGame from './endgame';
+import Intro from './intro';
 
 export default function Play(ctx) {
 
@@ -9,12 +11,17 @@ export default function Play(ctx) {
 
   let particles;
 
+  let scene;
+
   let timer = 0;
   let level = 0;
   let levels = new Levels();
   let board = new Board(this, ctx);
   let menu = new Menu(this, ctx);
   let transition = new Transition(this, ctx);
+  let endgame = new EndGame(this, ctx);
+  let intro = new Intro(this, ctx);
+
   transition.onTransition = () => {
     board.init(levels);
     particles = [];
@@ -39,13 +46,34 @@ export default function Play(ctx) {
     level = 0;
     levels.level(level);
     board.init(levels);
-    transition.init();
+    scene = intro;
+  };
+
+  this.beginLevels = () => {
+    level = 0;
+    transition.init(() => {
+      scene = board;
+    });
   };
 
   this.nextLevel = () => {
     level++;
-    levels.level(level);
-    transition.init();
+
+    if (level > levels.maxLevel) {
+      transition.init(() => {
+        scene = endgame;
+      });
+    } else {
+      levels.level(level);
+      transition.init();
+    }
+  };
+
+  this.resetLevels = () => {
+    level = 0;
+    transition.init(() => {
+      scene = board;
+    });
   };
 
   this.update = () => {
@@ -56,8 +84,7 @@ export default function Play(ctx) {
     }
 
     transition.update();
-
-    board.update();
+    scene.update();
 
     for (let particle of particles) {
       if (particle.l > 0) {
@@ -70,6 +97,8 @@ export default function Play(ctx) {
         particle.l = particle.ml;
       }
 
+      particle.j = particle.l / particle.ml * 320 * 4 % (320 + 32) - 32;
+      
     }
   };
 
@@ -92,15 +121,14 @@ export default function Play(ctx) {
     }
 
     for (let particle of particles) {
-      if (particle.l / particle.ml < 0.5) {
-        g.sspr(224, 224, 32, 32, particle.j - 32, particle.i, 32 * 3, 32 * 3);
-      }
+      g.sspr(224, 224, 32, 32, 
+             particle.j, 
+             particle.i, 
+             16, 16);
     }
 
-    board.draw();
-
+    scene.draw();
     transition.draw();
-
   };
   
 }
