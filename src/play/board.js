@@ -1,24 +1,36 @@
 import * as mu from './mutilz';
 import Map from './map';
-import FallBlock from './fallblock';
-import Player from './player';
+import * as types from './types';
 import Pool from 'poolf';
+
+let pxTileSize = 16;
+let nbTiles = 32;
+let pxWorldSize = pxTileSize * nbTiles;
+let pxScreenSizeX = 320;
+let pxScreenSizeY = 180;
+let nbTilesInScreenX = pxScreenSizeX / pxTileSize;
+let nbTilesInScreenY = pxScreenSizeY / pxTileSize;
 
 export default function Board(play, ctx) {
 
   let objects;
 
   let pPlayer = new Pool(() =>{
-    return new Player(this, ctx);
+    return new types.Player(this, ctx);
   });
 
   let pFallBlock = new Pool(() => {
-    return new FallBlock(this, ctx);
+    return new types.FallBlock(this, ctx);
+  });
+
+  let pJumpBlock = new Pool(() => {
+    return new types.JumpBlock(this, ctx);
   });
 
   const poolMap = {
     0: pPlayer,
-    20: pFallBlock
+    20: pFallBlock,
+    24: pJumpBlock,
   };
 
   function initObject(pool, x, y) {
@@ -62,6 +74,7 @@ export default function Board(play, ctx) {
   }
 
   this.checkObject = checkObject;
+  this.collideObject = collideObject;
   this.initObject = initObject;
   this.destroyObject = destroyObject;
 
@@ -74,7 +87,10 @@ export default function Board(play, ctx) {
     y: 0
   };
 
+  let initDelay = 0;
+
   this.init = () => {
+    initDelay = 0;
     objects = [];
 
     for (let i = 0; i < 32; i++) {
@@ -90,10 +106,18 @@ export default function Board(play, ctx) {
 
   this.killPlayer = p => {
     destroyObject(p);
-    this.init();
+    initDelay = 30;
   };
   
   this.update = () => {
+
+    if (initDelay > 0) {
+      --initDelay;
+      if (initDelay <= 0) {
+        this.init();
+      }
+    }
+
     for (let obj of objects) {
       obj.update();
     }
@@ -101,8 +125,16 @@ export default function Board(play, ctx) {
 
 
   this.draw = () => {
-    g.camera(cam.x - 160, cam.y - 90);
-    map.draw(0, 0, 32, 32);
+
+    let camx = mu.clamp(cam.x - 160, 0, pxWorldSize - pxScreenSizeX),
+        camy = mu.clamp(cam.y - 90, 0, pxWorldSize - pxScreenSizeY);
+
+    g.camera(camx, camy);
+
+    map.draw(Math.floor(camx / 16),
+             Math.floor(camy / 16),
+             nbTilesInScreenX + 1, 
+             nbTilesInScreenY + 1);
 
     for (let obj of objects) {
       obj.draw();

@@ -1,15 +1,12 @@
 import * as mu from './mutilz';
 import BaseObject from './object';
 
-const vMax = 4;
-const tMax = 20;
-
-const hMax = 16 * 3;
-const xSubH = 16 * 3;
-
-const v0Jump = (2 * hMax) * vMax / xSubH;
-const gJump = - (2 * hMax * vMax * vMax) / 
-      (xSubH * xSubH);
+import {
+  v0Jump,
+  gJump,
+  hAccel,
+  xFriction
+} from './phy';
 
 export default function Player(play, ctx) {
 
@@ -27,9 +24,6 @@ export default function Player(play, ctx) {
 
   let st = 0;
 
-  const xFriction = 5 / tMax,
-        hAccel = vMax * xFriction;
-
   const gFall = -gJump;
   
   
@@ -38,7 +32,7 @@ export default function Player(play, ctx) {
     base.init(x, y);
 
     jGrace = 0;
-    p.cbox = [1, 6, 14, 10];
+    p.cbox = [2, 6, 10, 10];
   };
 
   this.update = () => {
@@ -47,7 +41,7 @@ export default function Player(play, ctx) {
 
     p.x = mu.clamp(p.x, 0, 512 - 16);
 
-    if (p.y > 512) {
+    if (p.y >= 512) {
       play.killPlayer(this);
       return;
     }
@@ -67,10 +61,10 @@ export default function Player(play, ctx) {
       inputX = 1;
     }
 
-    if (e.up) {
+    if (e.x) {
       inputJ = true && !pJump;
     }
-    pJump = e.up;
+    pJump = e.x;
 
     if (inputJ) {
       jBuffer = 8;
@@ -81,6 +75,14 @@ export default function Player(play, ctx) {
     let _hAccel = inputX * hAccel;
     p.dx += _hAccel;
     p.dx += - p.dx * xFriction;
+
+    let wallDir = 0;
+
+    if (base.isSolid(-3, 0)) {
+      wallDir = -1;
+    } else if (base.isSolid(3, 0)) {
+      wallDir = 1;
+    }
 
     let isGrounded = base.isSolid(0, 1);
 
@@ -99,6 +101,13 @@ export default function Player(play, ctx) {
         p.ay = -gJump;
         p.dy = -v0Jump;
         jGrace = 0;
+        jBuffer = 0;
+      } else {
+        if (!isGrounded && wallDir !== 0) {
+          p.dy = -v0Jump * 0.8;
+          p.dx = -wallDir * hAccel * 4;
+          jBuffer = 0;
+        }
       }
     }
 
