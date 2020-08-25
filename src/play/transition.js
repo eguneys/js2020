@@ -5,10 +5,7 @@ export default function Transition(play, ctx) {
   let ct;
   
   const onTransition = () => {
-    this.onTransition();
-    if (ct) {
-      ct();
-    }
+    ct();
   };
 
   let timer = 0;
@@ -46,7 +43,6 @@ export default function Transition(play, ctx) {
   this.draw = () => {
     g.fill('#fff1e8');
     g.fr(x, 0, w, 180);
-    g.clearfont(x, 0, w, 180);
   };
   
 }

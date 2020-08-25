@@ -11,24 +11,10 @@ export default function Canvas(element) {
 
   resizeDisplay(element, canvas, ctx);
 
-  const fontCanvas = document.createElement('canvas');
-
-  this.fontCtx = fontCanvas.getContext('2d');
-
-  this.fontCtx.imageSmoothingEnabled = false;
-
-  fontCanvas.width = 1600;
-  fontCanvas.height = 900;
-
-  element.appendChild(fontCanvas);
-
-  resizeDisplay(element, fontCanvas, this.fontCtx);
-
   window
     .addEventListener('resize', 
                       () => {
                         resizeDisplay(element, canvas, ctx);
-                        resizeDisplay(element, fontCanvas, this.fontCtx);
                       });
 }
 

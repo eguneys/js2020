@@ -1,4 +1,8 @@
-    
+### QA
+
+    How many tiles are on screen
+    How many tiles are on a level
+
 ### Diary
 
     Day 0
@@ -8,6 +12,15 @@
     Day 1
       - Placeholder done
 
+    Day 2
+      - Beginning Level done
+
+    Day 3
+      - 
+
+### Misc Ideas
+
+    Decals
 
 ### Schedule
 
@@ -17,15 +30,16 @@
     Buffer 1 days
     Mechanics 6 days
     3     1 day
-            level load
-            player
-            solid tiles
-            collision
-            empty space
-            balloon
-    4     1 day
+            level load+
+            player+
+            solid tiles+
+            collision+
+            empty space+
             fall floor
             bounce floor
+    4     1 day
+            checkpoint
+            balloon
             spikes
     6     1 day
             one way floor
@@ -34,7 +48,6 @@
             colors switch floor
             collectible
     10     1 day
-              checkpoint
               hud
     13     1 day
               menu
@@ -187,8 +200,8 @@
         fruit
 
     challenge beginning
-        checkpoint
         spikes
+        checkpoint
         balloon
 
     development
@@ -198,7 +211,6 @@
     challenge development
         colors switch floor
 
-    cooldown
 
     no font
       collectible bar

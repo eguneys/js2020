@@ -22,10 +22,12 @@ export default function Play(ctx) {
 
   this.init = () => {
     scene = intro;
+    this.beginLevels();
   };
 
   this.beginLevels = () => {
     transition.init(() => {
+      board.init();
       scene = board;
     });
   };
