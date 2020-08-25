@@ -16,8 +16,29 @@
       - Beginning Level done
 
     Day 3
-      - 
+      - Level, collision, fall floor, bounce floor, player
+      - worked on camera following player within world bounds
+      - player wall jump needs work, haven't started on dash, animations
 
+    Day 4
+      -
+
+### TO DO
+
+    4 player
+        animations
+            - die
+            - land
+        dash
+        wall jump improve
+        die on fall
+    5   level
+          end level
+          next level
+    
+
+    
+    
 ### Misc Ideas
 
     Decals
@@ -35,8 +56,8 @@
             solid tiles+
             collision+
             empty space+
-            fall floor
-            bounce floor
+            fall floor+
+            bounce floor+
     4     1 day
             checkpoint
             balloon
