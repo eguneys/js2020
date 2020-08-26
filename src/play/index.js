@@ -20,6 +20,10 @@ export default function Play(ctx) {
   //g.fill('#fff1e8');
   g.fill('#1d2b53');
 
+  let stats = {
+    current: 0
+  };
+
   this.init = () => {
     scene = intro;
     this.beginLevels();
@@ -27,8 +31,15 @@ export default function Play(ctx) {
 
   this.beginLevels = () => {
     transition.init(() => {
-      board.init();
+      board.init(stats.current);
       scene = board;
+    });
+  };
+
+  this.nextLevel = (f) => {
+    stats.current++;
+    transition.init(() => {
+      board.init(stats.current);
     });
   };
 

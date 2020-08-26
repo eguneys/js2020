@@ -13,7 +13,7 @@ let nbTilesInScreenY = pxScreenSizeY / pxTileSize;
 
 export default function Board(play, ctx) {
 
-  let objects;
+  let objects = [];
 
   let pPlayer = new Pool(() =>{
     return new types.Player(this, ctx);
@@ -27,15 +27,32 @@ export default function Board(play, ctx) {
     return new types.JumpBlock(this, ctx);
   });
 
+  let pSpike = new Pool(() => {
+    return new types.Spike(this, ctx);
+  });
+
+  let pSplash = this.pSplash = new Pool(() => {
+    return new types.Splash(this, ctx);
+  });
+
   const poolMap = {
     0: pPlayer,
     20: pFallBlock,
     24: pJumpBlock,
+    40: pSpike
   };
 
-  function initObject(pool, x, y) {
+  let cam = this.cam = {
+    x: 0,
+    y: 0,
+    shake: 0,
+    shakex: 0,
+    shakey: 0
+  };
+
+  function initObject(pool, x, y, arg) {
     let res = pool.acquire(_ => 
-      _.init(x * 16, y * 16));
+      _.init(x, y, arg));
 
     res._pool = pool;
 
@@ -73,6 +90,22 @@ export default function Board(play, ctx) {
     return null;
   }
 
+  function smoke(x, y) {
+    initObject(pSplash, x, y, 1);
+  }
+
+  function shake() {
+    cam.shake = 10;
+  }
+
+  function nextLevel(player) {
+    destroyObject(player);
+    play.nextLevel();
+  }
+
+  this.nextLevel = nextLevel;
+  this.shake = shake;
+  this.smoke = smoke;
   this.checkObject = checkObject;
   this.collideObject = collideObject;
   this.initObject = initObject;
@@ -82,31 +115,38 @@ export default function Board(play, ctx) {
 
   let map = this.map = new Map(g);
 
-  let cam = this.cam = {
-    x: 0,
-    y: 0
-  };
-
   let initDelay = 0;
 
-  this.init = () => {
+  this.init = (level = map.level()) => {
+
+    map.level(level);
+
     initDelay = 0;
+
+    for (let obj of objects) {
+      obj._pool.release(obj);
+    }
+    
     objects = [];
 
     for (let i = 0; i < 32; i++) {
       for (let j = 0; j < 32; j++) {
-        let s = map.mget(0, i, j);
+        let s = map.mget(i, j);
 
         if (poolMap[s]) {
-          initObject(poolMap[s], i, j);
+          initObject(poolMap[s], i * 16, j * 16);
         }        
       }
     }
   };
 
   this.killPlayer = p => {
+    for (let i = 0; i < 4; i++) {
+      initObject(pSplash, p.p.x, p.p.y);
+    }
     destroyObject(p);
     initDelay = 30;
+    shake();
   };
   
   this.update = () => {
@@ -118,6 +158,14 @@ export default function Board(play, ctx) {
       }
     }
 
+    if (cam.shake > 0) {
+      cam.shake--;
+
+      cam.shakex = mu.appr(cam.shakex, 4 - Math.random() * 8, 1 + Math.random() * 4);
+      cam.shakey = mu.appr(cam.shakey, 4 - Math.random() * 8, 1 + Math.random() * 4);
+
+    }
+
     for (let obj of objects) {
       obj.update();
     }
@@ -126,10 +174,14 @@ export default function Board(play, ctx) {
 
   this.draw = () => {
 
-    let camx = mu.clamp(cam.x - 160, 0, pxWorldSize - pxScreenSizeX),
-        camy = mu.clamp(cam.y - 90, 0, pxWorldSize - pxScreenSizeY);
+    let camx = mu.clamp(cam.x - 160, 
+                        0,
+                        pxWorldSize - pxScreenSizeX),
+        camy = mu.clamp(cam.y - 90,
+                        0,
+                        pxWorldSize - pxScreenSizeY);
 
-    g.camera(camx, camy);
+    g.camera(camx + cam.shakex, camy + cam.shakey);
 
     map.draw(Math.floor(camx / 16),
              Math.floor(camy / 16),

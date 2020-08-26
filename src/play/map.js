@@ -3,12 +3,21 @@ import sprites from './sprites';
 
 export default function Map(g) {
 
+  let l = 0;
+
+  this.level = (_l) => {
+    if (_l || _l === 0) {
+      l = _l;
+    }
+    return l;
+  };
+
   this.solidAt = (x, y, w, h) => {
     for (let i = Math.max(0, Math.floor(x / 16)); 
          i <= Math.min(31, (x + w - 1) / 16); i++) {
       for (let j = Math.max(0, Math.floor(y / 16));
            j <= Math.min(31, (y + h - 1) / 16); j++) {
-        if (this.fget(0, i, j, 1)) {
+        if (this.fget(i, j, 1)) {
           return true;
         }
       }
@@ -16,18 +25,18 @@ export default function Map(g) {
     return false;
   };
   
-  this.fget = (l, x, y, f) => {
-    return sprites[this.mget(l, x, y)][2] === f;
+  this.fget = (x, y, f) => {
+    return sprites[this.mget(x, y)][2] === f;
   };
 
-  this.mget = (l, x, y) => {
+  this.mget = (x, y) => {
     return levels[l][y * 32 + x];
   };
 
   this.draw = (x, y, w, h) => {
     for (let i = 0; i < w; i++) {
       for (let j = 0; j < h; j++) {
-        let s = this.mget(0, x + i, y + j);
+        let s = this.mget(x + i, y + j);
         if (!s) continue;
         s = sprites[s];
 

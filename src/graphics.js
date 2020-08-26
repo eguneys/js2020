@@ -22,10 +22,18 @@ export default function Graphics(canvas, sprites) {
     cameraY = y;
   };
 
-  this.sspr = (sx, sy, sw, sh, dx, dy, dw = sw, dh = sh) => {
+  this.sspr = (sx, sy, sw, sh, dx, dy, dw = sw, dh = sh, flipx = false) => {
 
     dx = Math.floor(dx - cameraX);
     dy = Math.floor(dy - cameraY);
+
+
+    if (flipx) {
+
+      ctx.scale(-1, 1);
+      dx *= -1;
+      dx -= dw;
+    }
 
     ctx.drawImage(sprites, 
                   sx,
@@ -36,6 +44,8 @@ export default function Graphics(canvas, sprites) {
                   dy,
                   dw, 
                   dh);
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
   };
 
 }

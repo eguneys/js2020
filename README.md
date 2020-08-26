@@ -21,26 +21,56 @@
       - player wall jump needs work, haven't started on dash, animations
 
     Day 4
-      -
+      - Challenge beginning level done
+      - spike smoke shake die done
+      - level transition WIP
+
+    Day 5
+      - Development Level design
+
+      - Previous level
+      - solid floor colors on level1 and 2
+      - player
+        - die on fall on level1
+        - animation
+          - wall climb
+          - land
+    
 
 ### TO DO
 
+    guides
+      right arrow
+      "x" jump
+
+    checkpoint X
+    
+    smoke smaller
     4 player
         animations
-            - die
-            - land
-        dash
-        wall jump improve
+            - die?
+            - dash?
+            - wall climb
+            - land?
+        dash?
+        wall jump fix?
+
         die on fall
+            blue floors safe
+            red floors die on level1
     5   level
-          end level
-          next level
-    
+          end level+
+          next level+
+          previous level
 
     
     
 ### Misc Ideas
 
+    Stats
+        die
+        time
+        collectibles
     Decals
 
 ### Schedule
@@ -58,11 +88,11 @@
             empty space+
             fall floor+
             bounce floor+
-    4     1 day
-            checkpoint
-            balloon
-            spikes
-    6     1 day
+    5     1 day
+            balloon?
+            spikes +
+    7     1 day
+            checkpoint x
             one way floor
             spider
     8     1 day
@@ -77,9 +107,9 @@
         Level Design 5 days
     2       1 day
               Beginning
-    5       1 day
+    4       1 day
               challenge beginning
-    7       1 day
+    6       1 day
               development
     9       1 day
               challenge development
@@ -222,10 +252,10 @@
 
     challenge beginning
         spikes
-        checkpoint
         balloon
 
     development
+        checkpoint?
         one way floor
         spider
 

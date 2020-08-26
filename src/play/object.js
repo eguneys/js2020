@@ -10,6 +10,8 @@ export default function BaseObject(_super, play, ctx) {
   let p = this.p = {
     s: 0,
     si: 0,
+    sj: 0,
+    flipx: false,
     x: 0,
     y: 0,
     dx: 0,
@@ -88,7 +90,7 @@ export default function BaseObject(_super, play, ctx) {
 
   this.draw = () => {
     let s = sprites[p.s];
-    g.sspr(s[0] + p.si * 8, s[1], 8, 8, p.x, p.y, p.w, p.h);
+    g.sspr(s[0] + p.si * 8, s[1] + p.sj * 8, 8, 8, p.x, p.y, p.w, p.h, p.flipx);
   };
   
 }

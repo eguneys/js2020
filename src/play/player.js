@@ -1,3 +1,4 @@
+import * as types from './types';
 import * as mu from './mutilz';
 import BaseObject from './object';
 
@@ -23,6 +24,7 @@ export default function Player(play, ctx) {
   let jGrace;
 
   let st = 0;
+  let stOff = 0;
 
   const gFall = -gJump;
   
@@ -39,7 +41,18 @@ export default function Player(play, ctx) {
 
     base.update();
 
+    if (p.y <= 16) {
+      if (p.x > 512 - 16) {
+        play.nextLevel(this);
+        return;
+      }
+    }
+
     p.x = mu.clamp(p.x, 0, 512 - 16);
+
+    if (play.checkObject(this, types.Spike, 0, 0)) {
+      play.killPlayer(this);
+    }
 
     if (p.y >= 512) {
       play.killPlayer(this);
@@ -104,20 +117,58 @@ export default function Player(play, ctx) {
         jBuffer = 0;
       } else {
         if (!isGrounded && wallDir !== 0) {
-          p.dy = -v0Jump * 0.8;
-          p.dx = -wallDir * hAccel * 4;
+          p.dy = -v0Jump * 0.9;
+          p.dx = -wallDir * hAccel * 8;
           jBuffer = 0;
         }
       }
     }
 
+    let vSlideDrag = 0;
+    if (inputX !== 0 && base.isSolid(inputX, 0)) {
+      if (Math.sign(p.dy) > 0) {
+        vSlideDrag = 1;
+      }
+    }
+
     p.dy += p.ay;
+    p.dy += - p.dy * xFriction * 1.6 * vSlideDrag;
+
+
+    if (Math.sign(p.pdx) != Math.sign(p.dx) ||
+        p.wasGrounded !== isGrounded) {
+      play.smoke(p.x, p.y + 8);
+    }
+
+    p.pdy = p.dy;
+    p.pdx = p.dx;
+    p.wasGrounded = isGrounded;
 
     cam.x = cam.x + (p.x - cam.x) * 0.1;
     cam.y = cam.y + (p.y - cam.y) * 0.1;
 
-    st = (st + 1/30)%3;
-    p.si = Math.floor(st);
+    p.flipx = p.dx < -1 ? true:
+      p.dx > 1 ? false:
+      p.flipx;
+
+    if (!isGrounded) {
+      if (wallDir !== 0) {
+        st = 9;
+        stOff = (stOff + 1/10)%3;
+      } else {
+        st = 6;
+        stOff = (stOff + 1/5)%3;
+      }
+    } else if (Math.abs(p.dx) > 1) {
+      st = 3;
+      stOff = (stOff + 1/ 4) % 3;
+    } else {
+      st = 0;
+      stOff = (stOff + 1/ 30) % 3;
+    }
+
+
+    p.si = Math.floor(st + stOff);
   };
 
 
