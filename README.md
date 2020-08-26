@@ -55,6 +55,7 @@
         dash?
         wall jump fix?
 
+        scale on jump
         die on fall
             blue floors safe
             red floors die on level1
