@@ -40,12 +40,21 @@ export default function BaseObject(_super, play, ctx) {
             cbox[3]];
   };
 
+  this.isFlag  = (x, y, f) => {
+    let cbox = absCbox();
+    return map.solidAt(cbox[0] + x,
+                       cbox[1] + y,
+                       cbox[2],
+                       cbox[3], f);
+  };
+
   const isSolid = this.isSolid = (x, y) => {
     let cbox = absCbox();
     return map.solidAt(cbox[0] + x,
                         cbox[1] + y,
                         cbox[2],
                         cbox[3]) ||
+      play.checkObject(_super, types.ColorBlock, x, y) ||
       play.checkObject(_super, types.FallBlock, x, y);
   };
 

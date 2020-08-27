@@ -35,11 +35,21 @@ export default function Board(play, ctx) {
     return new types.Splash(this, ctx);
   });
 
+  let pBlueColorBlock = new Pool(() => {
+    return new types.ColorBlock(this, ctx, 38);
+  });
+
+  let pRedColorBlock = new Pool(() => {
+    return new types.ColorBlock(this, ctx, 54);
+  });
+
   const poolMap = {
     0: pPlayer,
     20: pFallBlock,
     24: pJumpBlock,
-    40: pSpike
+    40: pSpike,
+    38: pBlueColorBlock,
+    54: pRedColorBlock
   };
 
   let cam = this.cam = {

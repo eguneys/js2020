@@ -28,44 +28,54 @@
     Day 5
       - Development Level design +
 
-      - Previous level
-      - solid floor colors on level1 and 2
+      - Previous level +
+      - solid floor colors on level1 and 2 +
       - player
-        - die on fall on level1
+        - die on fall on level1+
         - animation
-          - wall climb
-          - land
+          - wall climb~
+          - land+
+      - color change floors+
+
+    Day 6
+      - collectible
+      - spider
+         - Spider throwing web before attack
+      - background
+      - Decals
     
 
 ### TO DO
 
-    camera shake bleeds tile on the edges
-    player bumping on the wall messes the animation
 
     guides
       right arrow
       "x" jump
 
-    checkpoint X
-    
     smoke smaller
-    4 player
+
+    camera shake bleeds tile on the edges
+
+    checkpoint X
+    player bumping on the wall messes the animation +
+
+    player
         animations
             - die?
             - dash?
             - wall climb
-            - land?
-        dash?
-        wall jump fix?
+            - land?+
+        dash? x
+        wall jump fix? x
 
-        scale on jump
-        die on fall
+        scale on jump+
+        die on fall+
             blue floors safe
             red floors die on level1
     5   level
           end level+
           next level+
-          previous level
+          previous level+
 
     
     
@@ -77,7 +87,12 @@
         die
         time
         collectibles
+
     Decals
+
+    Extra Hard levels
+
+    Basic Sound Synthesis
 
 ### Schedule
 
@@ -97,14 +112,13 @@
     6     1 day
             balloon?
             spikes +
+            colors switch floor+
     7     1 day
             checkpoint x
             one way floor x
             spider
-    8     1 day
-            colors switch floor
             collectible
-    10     1 day
+    8-10     2 days
               hud
     13     1 day
               menu
