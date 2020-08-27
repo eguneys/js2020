@@ -50,6 +50,12 @@ export default function Board(play, ctx) {
     shakey: 0
   };
 
+  function initCamera() {
+    cam.shake = 0;
+    cam.shakex = 0;
+    cam.shakey = 0;
+  }
+
   function initObject(pool, x, y, arg) {
     let res = pool.acquire(_ => 
       _.init(x, y, arg));
@@ -103,6 +109,12 @@ export default function Board(play, ctx) {
     play.nextLevel();
   }
 
+  function prevLevel(player) {
+    destroyObject(player);
+    play.prevLevel();
+  }
+
+  this.prevLevel = prevLevel;
   this.nextLevel = nextLevel;
   this.shake = shake;
   this.smoke = smoke;
@@ -122,6 +134,8 @@ export default function Board(play, ctx) {
     map.level(level);
 
     initDelay = 0;
+
+    initCamera();
 
     for (let obj of objects) {
       obj._pool.release(obj);

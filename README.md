@@ -26,7 +26,7 @@
       - level transition WIP
 
     Day 5
-      - Development Level design
+      - Development Level design +
 
       - Previous level
       - solid floor colors on level1 and 2
@@ -38,6 +38,9 @@
     
 
 ### TO DO
+
+    camera shake bleeds tile on the edges
+    player bumping on the wall messes the animation
 
     guides
       right arrow
@@ -68,7 +71,9 @@
     
 ### Misc Ideas
 
-    Stats
+    Spider throwing web before attack
+
+    Stats hud bar
         die
         time
         collectibles
@@ -89,12 +94,12 @@
             empty space+
             fall floor+
             bounce floor+
-    5     1 day
+    6     1 day
             balloon?
             spikes +
     7     1 day
             checkpoint x
-            one way floor
+            one way floor x
             spider
     8     1 day
             colors switch floor
@@ -110,7 +115,7 @@
               Beginning
     4       1 day
               challenge beginning
-    6       1 day
+    5       1 day
               development
     9       1 day
               challenge development
@@ -256,12 +261,11 @@
         balloon
 
     development
-        checkpoint?
-        one way floor
+        one way floor?
         spider
+        colors switch floor
 
     challenge development
-        colors switch floor
 
 
     no font

@@ -21,7 +21,7 @@ export default function Play(ctx) {
   g.fill('#1d2b53');
 
   let stats = {
-    current: 0
+    current: 2
   };
 
   this.init = () => {
@@ -36,11 +36,18 @@ export default function Play(ctx) {
     });
   };
 
-  this.nextLevel = (f) => {
+  this.nextLevel = () => {
     stats.current++;
     transition.init(() => {
       board.init(stats.current);
     });
+  };
+
+  this.prevLevel = () => {
+    stats.current--;
+    transition.init(() => {
+      board.init(stats.current);
+    });    
   };
 
   this.update = () => {

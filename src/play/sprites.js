@@ -6,11 +6,21 @@ export default {
   32: [0, 16, 1], // solid top left
   33: [8, 16, 1], // solid top
   34: [16, 16, 1], // solid top right
+  35: [24, 16, 1], // blue solid top left
+  36: [32, 16, 1], // blue solid top
+  37: [40, 16, 1], // blue solid top right
+  38: [48, 16, 1], // blue color block
   40: [64, 16], // spike
   48: [0, 24, 1], // solid left
   49: [8, 24, 1], // solid inside
   50: [16, 24, 1], // solid right
+  51: [24, 24, 1], // blue left
+  52: [32, 24, 1], // blue inside
+  53: [40, 24, 1], // blue right
+  54: [48, 24, 1], // blue
+  64: [0, 32, 1], // spider
   97: [8, 48], // collectable 0
+  101: [40, 48, 1], // blue
   113: [8, 56], // collectable 3
   117: [40, 56], // collectable 4
   130: [8, 64],  // collectable 2

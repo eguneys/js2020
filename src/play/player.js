@@ -48,6 +48,13 @@ export default function Player(play, ctx) {
       }
     }
 
+    if (p.y >= 512 - 32) {
+      if (p.x < 0) {
+        play.prevLevel(this);
+        return;
+      }
+    }
+
     p.x = mu.clamp(p.x, 0, 512 - 16);
 
     if (play.checkObject(this, types.Spike, 0, 0)) {
