@@ -26,21 +26,24 @@ export default function Map(g) {
   };
   
   this.fget = (x, y, f) => {
-    return (sprites[this.mget(x, y)][2] & f) === f;
+    let s = sprites[this.mget(x, y)];
+    return s && (s[2] & f) === f;
   };
 
   this.mget = (x, y) => {
     return levels[l][y * 32 + x];
   };
 
-  this.draw = (x, y, w, h) => {
+  this.draw = (x, y, w, h, f = 1) => {
     for (let i = 0; i < w; i++) {
       for (let j = 0; j < h; j++) {
         let s = this.mget(x + i, y + j);
         if (!s) continue;
         s = sprites[s];
 
-        if (this.fget(x + i, y + j, 1)) {
+        if (!s) continue;
+
+        if (this.fget(x + i, y + j, f)) {
           g.sspr(s[0], s[1], 8, 8, (x + i) * 16 , 
                  (y + j) * 16, 16, 16);
         }

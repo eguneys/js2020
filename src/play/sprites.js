@@ -1,6 +1,9 @@
 export default {
   '-1': [72, 16], // space
   0: [0, 0], // player
+
+  13: [0, 40], // die splash
+  14: [24, 40], // smoke fx
   20: [32, 8], // fall floor
   24: [64, 8], // jump block
   32: [0, 16, 3], // solid top left
@@ -18,14 +21,16 @@ export default {
   52: [32, 24, 1], // blue inside
   53: [40, 24, 1], // blue right
   54: [48, 24], // red color block
-  64: [0, 32, 1], // spider
+  64: [0, 32], // spider
   97: [8, 48], // collectable 0
   101: [40, 48], // collectable 5
   113: [8, 56], // collectable 3
   117: [40, 56], // collectable 4
   130: [8, 64],  // collectable 2
-  
+};
 
-  13: [0, 40],
-  14: [24, 40],
+export const decals = {
+  224: [0, 96],
+  229: [32, 96],
+  233: [64, 96]
 };

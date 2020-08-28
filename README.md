@@ -40,16 +40,28 @@
     Day 6
       - collectible +
         - collect animation ?
-      - spider
-         - Spider throwing web before attack
-      - background
-      - Decals
+
+    Day 7
+      - spider -
+      - background X
+      - Decals+
+
+    Day 8
+        - Menu
+        - Hud
+        - Transition
+        - Endgame
+
+    Day 9
+        - guides
+        - spider
+          - Spider throwing web before attack ?
     
 
 ### TO DO
 
 
-    guides
+    8 guides
       right arrow
       "x" jump
 
@@ -82,18 +94,18 @@
     
 ### Misc Ideas
 
-    Spider throwing web before attack
+    Spider throwing web before attack ?
 
     Stats hud bar
         die
         time
         collectibles
 
-    Decals
+    Decals+
 
-    Extra Hard levels
+    Extra Hard levels X
 
-    Basic Sound Synthesis
+    Basic Sound Synthesis X
 
 ### Schedule
 
@@ -119,12 +131,15 @@
             one way floor x
             spider
             collectible
-    8-10     2 days
-              hud
-    13     1 day
+    10      1 day
+            hud
+            progress save
+    8     1 day
               menu
               transition
               end game
+    14-13     1 day
+            hud
         Level Design 5 days
     2       1 day
               Beginning
@@ -134,8 +149,8 @@
               development
     9       1 day
               challenge development
-    14      1 day
-              cooldown
+            1 day
+              cooldown X
         Art 4 days
     1     1 day
             Placeholder art
@@ -150,6 +165,7 @@
             Logo
     16    1 day
             Refine animation
+            Refine levels
         Intro End Menu  3 days
     14      1 day
                 Menu

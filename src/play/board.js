@@ -1,7 +1,8 @@
 import * as mu from './mutilz';
 import Map from './map';
 import * as types from './types';
-import Pool from 'poolf';
+import Pool from './pool';
+import { decals as decalMap } from './sprites';
 
 let pxTileSize = 16;
 let nbTiles = 32;
@@ -63,6 +64,10 @@ export default function Board(play, ctx) {
     return new types.Collectible(this, ctx, 97, 0);
   });
 
+  let pSpider = new Pool(() => {
+    return new types.Spider(this, ctx);
+  });
+
   const poolMap = {
     0: pPlayer,
     20: pFallBlock,
@@ -74,7 +79,8 @@ export default function Board(play, ctx) {
     101: pCollect5,
     113: pCollect3,
     117: pCollect4,
-    130: pCollect2
+    130: pCollect2,
+    64: pSpider
   };
 
   let cam = this.cam = {
@@ -84,6 +90,8 @@ export default function Board(play, ctx) {
     shakex: 0,
     shakey: 0
   };
+
+  let decals = [];
 
   function initCamera() {
     cam.shake = 0;
@@ -153,6 +161,12 @@ export default function Board(play, ctx) {
     play.collect(collectible.info);
   }
 
+  function initDecal(decal, x, y) {
+    decals.push({
+      decal, x, y
+    });
+  }
+
   this.collect404 = collect404;
   this.prevLevel = prevLevel;
   this.nextLevel = nextLevel;
@@ -183,13 +197,17 @@ export default function Board(play, ctx) {
     
     objects = [];
 
+    decals = [];
+
     for (let i = 0; i < 32; i++) {
       for (let j = 0; j < 32; j++) {
         let s = map.mget(i, j);
 
         if (poolMap[s]) {
           initObject(poolMap[s], i * 16, j * 16);
-        }        
+        } else if (decalMap[s]) {
+          initDecal(decalMap[s], i * 16, j * 16);
+        }
       }
     }
   };
@@ -237,6 +255,10 @@ export default function Board(play, ctx) {
                         pxWorldSize - pxScreenSizeY);
 
     g.camera(camx + cam.shakex, camy + cam.shakey);
+
+    decals.forEach(({ decal, x, y }) => {
+      g.sspr(decal[0], decal[1], 32, 32, x, y, 64, 64);
+    });
 
     map.draw(Math.floor(camx / 16),
              Math.floor(camy / 16),
