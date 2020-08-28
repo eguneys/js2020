@@ -14,7 +14,9 @@ export function app(element, options) {
   let events = new Events();
   events.bind();
 
-  new Assets('assets/sprites.png')
+  let assetsBase = options.assetsBase || 'assets';
+
+  new Assets(assetsBase + '/sprites.png')
     .start(sprites => {
 
       let graphics = new Graphics(canvas, 

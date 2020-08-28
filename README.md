@@ -38,7 +38,8 @@
       - color change floors+
 
     Day 6
-      - collectible
+      - collectible +
+        - collect animation ?
       - spider
          - Spider throwing web before attack
       - background

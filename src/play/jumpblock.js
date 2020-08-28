@@ -37,6 +37,7 @@ export default function JumpBlock(play, ctx) {
         hit.p.y = p.y - 4;
         hit.p.dx *= 0.2;
         hit.p.dy = -v0Jump * 1.2;
+        hit.wasGrounded();
         delay = 10;
       }
     }

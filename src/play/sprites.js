@@ -20,7 +20,7 @@ export default {
   54: [48, 24], // red color block
   64: [0, 32, 1], // spider
   97: [8, 48], // collectable 0
-  101: [40, 48, 1], // blue
+  101: [40, 48], // collectable 5
   113: [8, 56], // collectable 3
   117: [40, 56], // collectable 4
   130: [8, 64],  // collectable 2

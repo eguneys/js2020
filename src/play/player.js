@@ -23,6 +23,13 @@ export default function Player(play, ctx) {
 
   let jGrace;
 
+  let wasGrounded;
+
+  let isDead;
+
+  let pdx,
+      pdy;
+
   let landingTimer;
 
   let st = 0;
@@ -36,6 +43,7 @@ export default function Player(play, ctx) {
   this.init = (x, y) => {
     base.init(x, y);
 
+    isDead = false;
 
     scalex = 1;
     scaley = 1;
@@ -43,6 +51,19 @@ export default function Player(play, ctx) {
     landingTimer = 0;
     jGrace = 0;
     p.cbox = [2, 6, 10, 10];
+  };
+
+  this.canCollect = () => {
+    return !isDead && wasGrounded;
+  };
+
+  this.wasGrounded = () => {
+    wasGrounded = true;
+  };
+
+  const killPlayer = () => {
+    isDead = true;
+    play.killPlayer(this);
   };
 
   this.update = () => {
@@ -66,11 +87,11 @@ export default function Player(play, ctx) {
     p.x = mu.clamp(p.x, 0, 512 - 16);
 
     if (play.checkObject(this, types.Spike, 0, 0)) {
-      play.killPlayer(this);
+      killPlayer();
     }
 
     if (p.y >= 512) {
-      play.killPlayer(this);
+      killPlayer();
       return;
     }
 
@@ -116,9 +137,9 @@ export default function Player(play, ctx) {
 
     let dieGround = base.isFlag(0, 1, 2);
 
-    if (!p.wasGrounded && dieGround) {
-      if (Math.abs(p.pdy) > v0Jump * 1.5 - 0.1) {
-        play.killPlayer(this);
+    if (!wasGrounded && dieGround) {
+      if (Math.abs(pdy) > v0Jump * 1.5 - 0.1) {
+        killPlayer();
       }
     }
 
@@ -169,19 +190,19 @@ export default function Player(play, ctx) {
 
     if (landingTimer > 0) {
       landingTimer--;
-    } else if (isGrounded && !p.wasGrounded) {
+    } else if (isGrounded && !wasGrounded) {
       landingTimer = 10;
     }
 
 
-    if (Math.sign(p.pdx) != Math.sign(p.dx) ||
-        p.wasGrounded !== isGrounded) {
+    if (Math.sign(pdx) != Math.sign(p.dx) ||
+        wasGrounded !== isGrounded) {
       play.smoke(p.x, p.y + 8);
     }
 
-    p.pdy = p.dy;
-    p.pdx = p.dx;
-    p.wasGrounded = isGrounded;
+    pdy = p.dy;
+    pdx = p.dx;
+    wasGrounded = isGrounded;
 
     cam.x = cam.x + (p.x - cam.x) * 0.1;
     cam.y = cam.y + (p.y - cam.y) * 0.1;

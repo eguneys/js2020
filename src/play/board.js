@@ -43,13 +43,38 @@ export default function Board(play, ctx) {
     return new types.ColorBlock(this, ctx, 54);
   });
 
+  let pCollect2 = new Pool(() => {
+    return new types.Collectible(this, ctx, 130, 2);
+  });
+
+  let pCollect3 = new Pool(() => {
+    return new types.Collectible(this, ctx, 113, 3);
+  });
+
+  let pCollect4 = new Pool(() => {
+    return new types.Collectible(this, ctx, 117, 4);
+  });
+
+  let pCollect5 = new Pool(() => {
+    return new types.Collectible(this, ctx, 101, 5);
+  });
+
+  let pCollect0 = new Pool(() => {
+    return new types.Collectible(this, ctx, 97, 0);
+  });
+
   const poolMap = {
     0: pPlayer,
     20: pFallBlock,
     24: pJumpBlock,
     40: pSpike,
     38: pBlueColorBlock,
-    54: pRedColorBlock
+    54: pRedColorBlock,
+    97: pCollect0,
+    101: pCollect5,
+    113: pCollect3,
+    117: pCollect4,
+    130: pCollect2
   };
 
   let cam = this.cam = {
@@ -124,6 +149,11 @@ export default function Board(play, ctx) {
     play.prevLevel();
   }
 
+  function collect404(collectible) {
+    play.collect(collectible.info);
+  }
+
+  this.collect404 = collect404;
   this.prevLevel = prevLevel;
   this.nextLevel = nextLevel;
   this.shake = shake;
@@ -168,6 +198,7 @@ export default function Board(play, ctx) {
     for (let i = 0; i < 4; i++) {
       initObject(pSplash, p.p.x, p.p.y);
     }
+
     destroyObject(p);
     initDelay = 30;
     shake();

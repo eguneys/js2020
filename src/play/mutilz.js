@@ -1,3 +1,7 @@
+export const lerp = (value, target, factor = 0.1) =>{
+  return value + (target - value) * factor;
+};
+
 export const appr = (value, target, accel) => {
   if (value < target) {
     return Math.min(value + accel, target);

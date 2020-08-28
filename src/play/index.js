@@ -50,6 +50,10 @@ export default function Play(ctx) {
     });    
   };
 
+  this.collect = (number) => {
+    console.log(number);
+  };
+
   this.update = () => {
     timer++;
 
