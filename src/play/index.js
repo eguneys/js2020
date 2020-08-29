@@ -21,7 +21,7 @@ export default function Play(ctx) {
   g.fill('#1d2b53');
 
   let stats = {
-    current: 2,
+    current: 0,
     colls: []
   };
 
