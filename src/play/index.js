@@ -21,12 +21,18 @@ export default function Play(ctx) {
   g.fill('#1d2b53');
 
   let stats = {
-    current: 0
+    current: 2,
+    colls: []
   };
 
   this.init = () => {
     scene = intro;
-    this.beginLevels();
+  };
+
+  this.beginIntro = () => {
+    transition.init(() => {
+      scene = intro;
+    });
   };
 
   this.beginLevels = () => {
@@ -37,25 +43,52 @@ export default function Play(ctx) {
   };
 
   this.nextLevel = () => {
-    stats.current++;
-    transition.init(() => {
-      board.init(stats.current);
-    });
+    if (stats.current === 2) {
+      transition.init(() => {
+        stats.current = 0;
+        scene = endgame;
+      });
+    } else {
+      stats.current++;
+      transition.init(() => {
+        board.init(stats.current);
+      });
+    }
   };
 
   this.prevLevel = () => {
-    stats.current--;
+    if (stats.current > 0) {
+      stats.current--;
+    }
     transition.init(() => {
       board.init(stats.current);
     });    
   };
 
-  this.collect = (number) => {
-    console.log(number);
+  this.scollect = (info) => {
+    for (let colls of stats.colls) {
+      if (colls[0] === info[0] &&
+          colls[1] === info[1] &&
+          colls[2] === info[2]) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  this.collect = (info) => {
+    stats.colls.push(info);
+    endgame.collect(info[0]);
   };
 
   this.update = () => {
     timer++;
+
+    if (e.p.enter) {
+      transition.init(() => {
+        scene = endgame;
+      });      
+    }
 
     transition.update();
     scene.update();

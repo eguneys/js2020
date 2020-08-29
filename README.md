@@ -17,7 +17,7 @@
 
     Day 3
       - Level, collision, fall floor, bounce floor, player
-      - worked on camera following player within world bounds
+      - camera following player within world bounds
       - player wall jump needs work, haven't started on dash, animations
 
     Day 4
@@ -47,10 +47,12 @@
       - Decals+
 
     Day 8
-        - Menu
-        - Hud
-        - Transition
-        - Endgame
+        - Menu X
+        - Intro +
+        - Transition ?
+        - Endgame +
+          - Collectibles +
+        - Hud ?
 
     Day 9
         - guides

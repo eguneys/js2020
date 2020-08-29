@@ -7,9 +7,11 @@ export default function Events() {
   let ps = {};
 
   this.update = () => {
+    this.p.any = false;
     for (let key of allKeys) {
       if (this[key] && !ps[key]) {
         this.p[key] = true;
+        this.p.any = true;
       } else {
         this.p[key] = false;
       }

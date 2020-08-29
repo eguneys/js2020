@@ -158,6 +158,7 @@ export default function Board(play, ctx) {
   }
 
   function collect404(collectible) {
+    destroyObject(collectible);
     play.collect(collectible.info);
   }
 
@@ -204,7 +205,11 @@ export default function Board(play, ctx) {
         let s = map.mget(i, j);
 
         if (poolMap[s]) {
-          initObject(poolMap[s], i * 16, j * 16);
+          let co = initObject(poolMap[s], i * 16, j * 16);
+
+          if (co.info && !play.scollect(co.info)) {
+            destroyObject(co);
+          }
         } else if (decalMap[s]) {
           initDecal(decalMap[s], i * 16, j * 16);
         }
