@@ -1,8 +1,12 @@
 ### A platformer for #js13k
 
+![home screen](images/colerhome.gif)
+
 Inspired by [Celeste PICO-8](https://www.lexaloffle.com/bbs/?tid=2145). Made in 10 days.
 
 Play live at [JS13K entries]().
+
+[Gameplay gif](https://twitter.com/eguneys/status/1299769426644959234?s=20).
 
 Controls:
 
