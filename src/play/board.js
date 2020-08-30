@@ -83,6 +83,8 @@ export default function Board(play, ctx) {
     64: pSpider
   };
 
+  let t = 0;
+
   let cam = this.cam = {
     x: 0,
     y: 0,
@@ -229,6 +231,8 @@ export default function Board(play, ctx) {
   
   this.update = () => {
 
+    t++;
+
     if (initDelay > 0) {
       --initDelay;
       if (initDelay <= 0) {
@@ -269,6 +273,15 @@ export default function Board(play, ctx) {
              Math.floor(camy / 16),
              nbTilesInScreenX + 1, 
              nbTilesInScreenY + 1);
+
+    g.sspr(120, 0, 8, 8, 
+           Math.sin(t % 60 / 60 * Math.PI * 2) * 4 +
+           pxWorldSize - 24, 12, 
+           16, 16);
+
+    g.sspr(120, 0, 8, 8,
+           Math.sin(t % 60 / 60 * Math.PI * 2) * 4 +
+           8, pxWorldSize - 48, 16, 16, true);
 
     for (let obj of objects) {
       obj.draw();

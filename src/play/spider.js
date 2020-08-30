@@ -9,6 +9,8 @@ export default function FallBlock(play, ctx) {
   let p = this.p = base.p;
   p.s = 64;
 
+  let t = 0;
+
   let dirX;
 
   this.init = (x, y) => {
@@ -20,12 +22,16 @@ export default function FallBlock(play, ctx) {
   this.update = () => {
     base.update();
 
+    t++;
+
     if (p.dx < 0 && 
         !base.isSolid(-16, -1)) {
       p.dx *= -1;
     } else if (!base.isSolid(16, -1)) {
       p.dx *= -1;
     }
+
+    p.si = Math.floor((t % 20 / 21) * 3);
 
   };
 

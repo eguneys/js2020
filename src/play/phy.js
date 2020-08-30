@@ -1,5 +1,5 @@
 export const vMax = 4;
-export const tMax = 20;
+export const tMax = 15;
 
 export const hMax = 16 * 3;
 export const xSubH = 16 * 3;

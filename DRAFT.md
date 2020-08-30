@@ -54,7 +54,7 @@
           - Collectibles +
 
     Day 9
-        - guides
+        - guides+
         - Hud ?
         - ending ?
         - spider
