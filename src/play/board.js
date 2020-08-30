@@ -68,6 +68,10 @@ export default function Board(play, ctx) {
     return new types.Spider(this, ctx);
   });
 
+  let pBgDrop = new Pool(() => {
+    return new types.BgDrop(this, ctx);
+  });
+
   const poolMap = {
     0: pPlayer,
     20: pFallBlock,

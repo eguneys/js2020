@@ -54,12 +54,13 @@
           - Collectibles +
 
     Day 9
+        - atmosphere
         - guides+
-        - Hud ?
+        - Hud ?X
         - ending ?
         - spider
           - animation
-            - move
+            - move+
             - attack X
             - retreat X
           - Spider throwing web before attack X
