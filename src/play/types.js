@@ -6,4 +6,4 @@ export { default as Splash } from './splash';
 export { default as ColorBlock } from './colorblock';
 export { default as Collectible } from './collectible';
 export { default as Spider } from './spider';
-
+export { default as BgDrop } from './bgdrop';

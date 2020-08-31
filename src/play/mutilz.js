@@ -1,3 +1,11 @@
+export const maybe = (max) => {
+  return Math.random() < max;
+};
+
+export const rnd = (max) => {
+  return Math.random() * max;
+};
+
 export const lerp = (value, target, factor = 0.1) =>{
   return value + (target - value) * factor;
 };

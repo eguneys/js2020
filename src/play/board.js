@@ -3,6 +3,7 @@ import Map from './map';
 import * as types from './types';
 import Pool from './pool';
 import { decals as decalMap } from './sprites';
+import BgAtm from './bgatm';
 
 let pxTileSize = 16;
 let nbTiles = 32;
@@ -96,6 +97,8 @@ export default function Board(play, ctx) {
     shakex: 0,
     shakey: 0
   };
+
+  let bgatm = new BgAtm(this, ctx);
 
   let decals = [];
 
@@ -196,6 +199,8 @@ export default function Board(play, ctx) {
 
     initDelay = 0;
 
+    bgatm.init();
+
     initCamera();
 
     for (let obj of objects) {
@@ -219,6 +224,14 @@ export default function Board(play, ctx) {
         } else if (decalMap[s]) {
           initDecal(decalMap[s], i * 16, j * 16);
         }
+
+        if (j < 30 && Math.random() < 0.3) {
+          
+          let sd = map.mget(i, j + 1, 1);
+          if ((s === 33 || s === 36 || s === 49 || s === 52) && sd === -1) {
+            initObject(pBgDrop, i * 16, (j + 1) * 16); 
+          }
+        }
       }
     }
   };
@@ -228,6 +241,7 @@ export default function Board(play, ctx) {
       initObject(pSplash, p.p.x, p.p.y);
     }
 
+    bgatm.off();
     destroyObject(p);
     initDelay = 30;
     shake();
@@ -255,6 +269,8 @@ export default function Board(play, ctx) {
     for (let obj of objects) {
       obj.update();
     }
+
+    bgatm.update();
   };
 
 
@@ -266,6 +282,9 @@ export default function Board(play, ctx) {
         camy = mu.clamp(cam.y - 90,
                         0,
                         pxWorldSize - pxScreenSizeY);
+    g.camera(camx * 0.8 + cam.shakex, camy * 0.8 + cam.shakey);
+
+    bgatm.draw();
 
     g.camera(camx + cam.shakex, camy + cam.shakey);
 
