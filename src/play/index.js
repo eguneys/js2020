@@ -5,7 +5,7 @@ import Intro from './intro';
 
 export default function Play(ctx) {
 
-  let { g, e } = ctx;
+  let { g, e, a } = ctx;
 
   let particles;
 
@@ -43,7 +43,7 @@ export default function Play(ctx) {
   };
 
   this.nextLevel = () => {
-    if (stats.current === 2) {
+    if (stats.current === 4) {
       transition.init(() => {
         stats.current = 0;
         scene = endgame;
@@ -87,7 +87,7 @@ export default function Play(ctx) {
     if (e.p.enter) {
       transition.init(() => {
         scene = endgame;
-      });      
+      });
     }
 
     transition.update();

@@ -15,6 +15,8 @@ let nbTilesInScreenY = pxScreenSizeY / pxTileSize;
 
 export default function Board(play, ctx) {
 
+  let { g, e, a } = ctx;
+
   let objects = [];
 
   let pPlayer = new Pool(() =>{
@@ -95,8 +97,11 @@ export default function Board(play, ctx) {
     y: 0,
     shake: 0,
     shakex: 0,
-    shakey: 0
+    shakey: 0,
+    viewoffy: 0,
   };
+
+  let inputDown = 0;
 
   let bgatm = new BgAtm(this, ctx);
 
@@ -177,6 +182,27 @@ export default function Board(play, ctx) {
     });
   }
 
+  let sfxDelay = 0;
+
+  function psfx(s, x, y) {
+    if (sfxDelay > 0) {
+      return;
+    }
+    let camx = mu.clamp(cam.x - 160, 
+                        0,
+                        pxWorldSize - pxScreenSizeX),
+        camy = mu.clamp(cam.y + cam.viewoffy - 90,
+                        0,
+                        pxWorldSize - pxScreenSizeY);
+
+    if (x >= camx && x <= camx + pxScreenSizeX &&
+        y >= camy && y <= camy + pxScreenSizeY) {
+      a.sfx(s, 0.1);
+      sfxDelay = 20;
+    }
+  }
+
+  this.psfx = psfx;
   this.collect404 = collect404;
   this.prevLevel = prevLevel;
   this.nextLevel = nextLevel;
@@ -186,8 +212,6 @@ export default function Board(play, ctx) {
   this.collideObject = collideObject;
   this.initObject = initObject;
   this.destroyObject = destroyObject;
-
-  let { g, e } = ctx;
 
   let map = this.map = new Map(g);
 
@@ -219,7 +243,7 @@ export default function Board(play, ctx) {
           let co = initObject(poolMap[s], i * 16, j * 16);
 
           if (co.info && !play.scollect(co.info)) {
-            destroyObject(co);
+            co.collected();
           }
         } else if (decalMap[s]) {
           initDecal(decalMap[s], i * 16, j * 16);
@@ -241,6 +265,7 @@ export default function Board(play, ctx) {
       initObject(pSplash, p.p.x, p.p.y);
     }
 
+    a.sfx(4);
     bgatm.off();
     destroyObject(p);
     initDelay = 30;
@@ -249,6 +274,21 @@ export default function Board(play, ctx) {
   
   this.update = () => {
 
+    if (inputDown < 20) {
+      if (e.down) {
+        inputDown++;
+      }
+    } else {
+      if (!e.down) {
+        cam.viewoffy = mu.appr(cam.viewoffy, 0, 4);
+        if (cam.viewoffy === 0) {
+          inputDown = 0;
+        }
+      } else {
+        cam.viewoffy = mu.appr(cam.viewoffy, 80, 4);
+      }
+    }
+
     t++;
 
     if (initDelay > 0) {
@@ -256,6 +296,10 @@ export default function Board(play, ctx) {
       if (initDelay <= 0) {
         this.init();
       }
+    }
+
+    if (sfxDelay > 0) {
+      sfxDelay--;
     }
 
     if (cam.shake > 0) {
@@ -279,7 +323,7 @@ export default function Board(play, ctx) {
     let camx = mu.clamp(cam.x - 160, 
                         0,
                         pxWorldSize - pxScreenSizeX),
-        camy = mu.clamp(cam.y - 90,
+        camy = mu.clamp(cam.y + cam.viewoffy - 90,
                         0,
                         pxWorldSize - pxScreenSizeY);
     g.camera(camx * 0.4 + cam.shakex, camy * 0.4 + cam.shakey);

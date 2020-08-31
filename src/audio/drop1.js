@@ -5,37 +5,37 @@
     // use it in a demo.
 
     // Song data
-    var song = {
+export default {
       songData: [
         { // Instrument 0
           i: [
-          0, // OSC1_WAVEFORM
-          79, // OSC1_VOL
-          127, // OSC1_SEMI
+          3, // OSC1_WAVEFORM
+          255, // OSC1_VOL
+          138, // OSC1_SEMI
           0, // OSC1_XENV
-          1, // OSC2_WAVEFORM
-          8, // OSC2_VOL
-          137, // OSC2_SEMI
-          1, // OSC2_DETUNE
+          0, // OSC2_WAVEFORM
+          255, // OSC2_VOL
+          115, // OSC2_SEMI
+          0, // OSC2_DETUNE
           0, // OSC2_XENV
-          0, // NOISE_VOL
-          49, // ENV_ATTACK
-          23, // ENV_SUSTAIN
-          77, // ENV_RELEASE
-          87, // ARP_CHORD
-          3, // ARP_SPEED
+          15, // NOISE_VOL
+          2, // ENV_ATTACK
+          0, // ENV_SUSTAIN
+          29, // ENV_RELEASE
+          0, // ARP_CHORD
+          0, // ARP_SPEED
           0, // LFO_WAVEFORM
-          29, // LFO_AMT
-          2, // LFO_FREQ
-          0, // LFO_FX_FREQ
-          2, // FX_FILTER
-          107, // FX_FREQ
-          49, // FX_RESONANCE
-          14, // FX_DIST
-          100, // FX_DRIVE
+          96, // LFO_AMT
+          3, // LFO_FREQ
+          1, // LFO_FX_FREQ
+          3, // FX_FILTER
+          64, // FX_FREQ
+          44, // FX_RESONANCE
+          3, // FX_DIST
+          29, // FX_DRIVE
           0, // FX_PAN_AMT
-          0, // FX_PAN_FREQ
-          0, // FX_DELAY_AMT
+          12, // FX_PAN_FREQ
+          28, // FX_DELAY_AMT
           3 // FX_DELAY_TIME
           ],
           // Patterns

@@ -54,7 +54,6 @@
           - Collectibles +
 
     Day 9
-        - atmosphere
         - guides+
         - Hud ?X
         - ending ?
@@ -66,9 +65,18 @@
           - Spider throwing web before attack X
 
     Day 10
+       - atmosphere+
+         - sfx+
+       - level 4-5+
+
+    Day 11
+        - endgame all clear
+          - sfx X
+          - animation
+
+    Day 12
         - art refinement
         - level refinement
-        - level 4
     
 
 ### TO DO
@@ -78,18 +86,18 @@
       right arrow
       "x" jump
 
-    smoke smaller
+    smoke smaller+
 
-    camera shake bleeds tile on the edges
+    camera shake bleeds tile on the edges X
 
     checkpoint X
     player bumping on the wall messes the animation +
 
     player
         animations
-            - die?
-            - dash?
-            - wall climb
+            - die?X
+            - dash?X
+            - wall climbX
             - land?+
         dash? x
         wall jump fix? x

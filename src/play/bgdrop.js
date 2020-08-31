@@ -3,7 +3,7 @@ import * as types from './types';
 
 export default function BgDrop(play, ctx) {
 
-  let { g } = ctx;
+  let { g, a } = ctx;
 
   let map = play.map;
   
@@ -17,6 +17,7 @@ export default function BgDrop(play, ctx) {
   let faccel;
 
   let si;
+  let dsfx;
 
   this.base = {
     absCbox: () => {
@@ -34,6 +35,7 @@ export default function BgDrop(play, ctx) {
     grow = 0;
     faccel = 0;
     si = 0;
+    dsfx = 1 + Math.floor(Math.random() * 2.9);
   };
 
   this.update = () => {
@@ -59,9 +61,11 @@ export default function BgDrop(play, ctx) {
         fall += faccel;
 
         if (
+          fall > 16 * 32 ||
           play.checkObject(this, types.Player, 0, 0) ||
           map.solidAt(x, y + fall, 16, 16)) {
           splash = 20;
+          play.psfx(dsfx, x, y + fall);
         }
       }
     }

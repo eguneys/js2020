@@ -11,7 +11,7 @@ import {
 
 export default function Player(play, ctx) {
 
-  let { e, g } = ctx;
+  let { e, g, a } = ctx;
 
   let cam = play.cam;
 
@@ -39,7 +39,7 @@ export default function Player(play, ctx) {
   
   let scalex,
       scaley;
-  
+
   this.init = (x, y) => {
     base.init(x, y);
 
@@ -159,14 +159,15 @@ export default function Player(play, ctx) {
         p.dy = -v0Jump;
         jGrace = 0;
         jBuffer = 0;
-          scalex = 0.6;
-          scaley = 1.4;
-
+        scalex = 0.6;
+        scaley = 1.4;
+        a.sfx(5);
       } else {
         if (!isGrounded && wallDir !== 0) {
           p.dy = -v0Jump * 0.9;
           p.dx = -wallDir * hAccel * 8;
           jBuffer = 0;
+          a.sfx(5);
         }
       }
     }

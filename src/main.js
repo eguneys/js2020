@@ -2,6 +2,9 @@ import Canvas from './canvas';
 import Graphics from './graphics';
 import Assets from './assets';
 
+import Audio from './audio';
+import audioData from './audio/data';
+
 import Loop from './loop';
 import Play from './play';
 
@@ -16,6 +19,9 @@ export function app(element, options) {
 
   let assetsBase = options.assetsBase || 'assets';
 
+  let audio = new Audio();
+  // audio.generate(audioData);
+
   new Assets(assetsBase + '/sprites.png')
     .start(sprites => {
 
@@ -24,7 +30,8 @@ export function app(element, options) {
 
       let ctx = {
         g: graphics,
-        e: events
+        e: events,
+        a: audio
       };
 
       let play = new Play(ctx);

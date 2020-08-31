@@ -4,7 +4,7 @@ import BaseObject from './object';
 
 export default function Collectible(play, ctx, s, n) {
   
-  let { e, g } = ctx;
+  let { e, g, a } = ctx;
 
   let base = this.base = new BaseObject(this, play, ctx);
   let p = this.p = base.p;
@@ -17,8 +17,16 @@ export default function Collectible(play, ctx, s, n) {
   let followP;
   let cFlashTimer;
 
+  let collected;
+
+  this.collected = () => {
+    collected = true;
+  };
+
   this.init = (x, y) => {
     base.init(x, y);
+
+    collected = false;
 
     cFlashTimer = 0;
     followP = null;
@@ -50,6 +58,7 @@ export default function Collectible(play, ctx, s, n) {
       if (followP.canCollect()) {
         followP = null;
         cFlashTimer = 30;
+        a.sfx(0);
       }
     }
 
@@ -60,7 +69,9 @@ export default function Collectible(play, ctx, s, n) {
       }
     }
 
-    if (cFlashTimer === 0 && timer % 60 < 30) {
+    if (collected) {
+      p.si = -1;
+    } else if (cFlashTimer === 0 && timer % 60 < 30) {
       p.si = Math.floor(timer % 30 / 30 * 3);
     } else {
       p.si = 0;

@@ -10,7 +10,8 @@ Play live at [JS13K entries]().
 
 Controls:
 
-`Arrow keys` to move.
+`Left Right` to move.
+`Down` to look down.
 `X` to jump.
 `Enter` to see status codes.
 

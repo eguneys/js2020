@@ -8,7 +8,7 @@ import {
 
 export default function JumpBlock(play, ctx) {
 
-  let { e, g } = ctx;
+  let { e, g, a } = ctx;
 
   let base = this.base = new BaseObject(this, play, ctx);
   let p = this.p = base.p;
@@ -39,6 +39,7 @@ export default function JumpBlock(play, ctx) {
         hit.p.dy = -v0Jump * 1.2;
         hit.wasGrounded();
         delay = 10;
+        a.sfx(5);
       }
     }
   };
