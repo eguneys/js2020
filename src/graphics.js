@@ -48,4 +48,36 @@ export default function Graphics(canvas, sprites) {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
   };
 
+  // let palette = [
+  //   0x000000,
+  //   0x1d2b53,
+  //   0x7e2553,
+  //   0x008751,
+  //   0xab5236,
+  //   0x5f574f,
+  //   0xc2c3c7,
+  //   0xfff1e8,
+  //   0xff004d,
+  //   0xffa300,
+  //   0xffec27,
+  //   0x00e436,
+  //   0x29adff,
+  //   0x83769c,
+  //   0xff77a8,
+  //   0xffccaa
+  // ];
+
+  this.corrupt = (transform) => {
+    let imageData = ctx.getImageData(0, 0, 320, 180);
+
+    for (let i = 0; i < transform.length; i++) {
+      corruptRect(imageData, 
+                  transform[i][0], transform[i][1],
+                  transform[i][2], transform[i][3],
+                  transform[i][4]);
+    }
+
+    ctx.putImageData(imageData, 0, 0);    
+  };
+
 }

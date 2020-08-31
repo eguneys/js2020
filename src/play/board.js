@@ -48,7 +48,7 @@ export default function Board(play, ctx) {
   });
 
   let pCollect2 = new Pool(() => {
-    return new types.Collectible(this, ctx, 130, 2);
+    return new types.Collectible(this, ctx, 129, 2);
   });
 
   let pCollect3 = new Pool(() => {
@@ -86,7 +86,7 @@ export default function Board(play, ctx) {
     101: pCollect5,
     113: pCollect3,
     117: pCollect4,
-    130: pCollect2,
+    129: pCollect2,
     64: pSpider
   };
 

@@ -26,11 +26,11 @@ export default {
   101: [40, 48], // collectable 5
   113: [8, 56], // collectable 3
   117: [40, 56], // collectable 4
-  130: [8, 64],  // collectable 2
+  129: [8, 64],  // collectable 2
 };
 
 export const decals = {
   224: [0, 96],
-  229: [32, 96],
-  233: [64, 96]
+  229: [64, 64],
+  233: [96, 64]
 };
