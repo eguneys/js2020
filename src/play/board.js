@@ -282,7 +282,7 @@ export default function Board(play, ctx) {
         camy = mu.clamp(cam.y - 90,
                         0,
                         pxWorldSize - pxScreenSizeY);
-    g.camera(camx * 0.8 + cam.shakex, camy * 0.8 + cam.shakey);
+    g.camera(camx * 0.4 + cam.shakex, camy * 0.4 + cam.shakey);
 
     bgatm.draw();
 

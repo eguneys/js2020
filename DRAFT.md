@@ -66,9 +66,9 @@
           - Spider throwing web before attack X
 
     Day 10
-        - level 4
-        - level refinement
         - art refinement
+        - level refinement
+        - level 4
     
 
 ### TO DO
