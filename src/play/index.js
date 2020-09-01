@@ -2,7 +2,6 @@ import Board from './board';
 import Transition from './transition';
 import EndGame from './endgame';
 import Intro from './intro';
-import Corruption from './corruption';
 
 export default function Play(ctx) {
 
@@ -17,8 +16,6 @@ export default function Play(ctx) {
   let transition = new Transition(this, ctx);
   let endgame = new EndGame(this, ctx);
   let intro = new Intro(this, ctx);
-
-  let corruption = new Corruption(this, ctx);
 
   //g.fill('#fff1e8');
   g.fill('#1d2b53');
@@ -95,8 +92,6 @@ export default function Play(ctx) {
 
     transition.update();
     scene.update();
-
-    corruption.update();
   };
 
   this.draw = () => {
@@ -104,8 +99,6 @@ export default function Play(ctx) {
 
     scene.draw();
     transition.draw();
-
-    corruption.draw();
   };
   
 }

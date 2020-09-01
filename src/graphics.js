@@ -67,17 +67,4 @@ export default function Graphics(canvas, sprites) {
   //   0xffccaa
   // ];
 
-  this.corrupt = (transform) => {
-    let imageData = ctx.getImageData(0, 0, 320, 180);
-
-    for (let i = 0; i < transform.length; i++) {
-      corruptRect(imageData, 
-                  transform[i][0], transform[i][1],
-                  transform[i][2], transform[i][3],
-                  transform[i][4]);
-    }
-
-    ctx.putImageData(imageData, 0, 0);    
-  };
-
 }

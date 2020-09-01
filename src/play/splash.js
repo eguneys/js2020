@@ -6,6 +6,7 @@ export default function Splash(play, ctx) {
 
   let base = this.base = new BaseObject(this, play, ctx);
   let p = this.p = base.p;
+  p.solid = false;
   p.s = 13;
 
   let l = 0;

@@ -12,6 +12,7 @@ export default function BaseObject(_super, play, ctx) {
     si: 0,
     sj: 0,
     flipx: false,
+    solid: true,
     x: 0,
     y: 0,
     dx: 0,
@@ -59,6 +60,11 @@ export default function BaseObject(_super, play, ctx) {
   };
 
   const moveX = amount => {
+    if (!p.solid) {
+      p.x += amount;
+      return;
+    }
+
     let step = Math.sign(amount);
     for (let i = 0; i < Math.abs(amount); i++) {
       if (!isSolid(step, 0)) {
@@ -71,6 +77,11 @@ export default function BaseObject(_super, play, ctx) {
   };
 
   const moveY = amount => {
+    if (!p.solid) {
+      p.y += amount;
+      return;
+    }
+
     let step = Math.sign(amount);
     for (let i = 0; i < Math.abs(amount); i++) {
       if (!isSolid(0, step)) {
