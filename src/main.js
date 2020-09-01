@@ -20,7 +20,7 @@ export function app(element, options) {
   let assetsBase = options.assetsBase || 'assets';
 
   let audio = new Audio();
-  //audio.generate(audioData);
+  audio.generate(audioData);
 
   new Assets(assetsBase + '/sprites.png')
     .start(sprites => {
