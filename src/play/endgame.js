@@ -29,8 +29,8 @@ export default function EndGame(play, ctx) {
   let t = 0;
 
   // seconds
-  let maxTime = 30,
-      maxDie = 30;
+  let maxTime = 447,
+      maxDie = 53;
 
   let time,
       die,
@@ -61,8 +61,8 @@ export default function EndGame(play, ctx) {
   this.update = () => {
     t++;
 
-    iTime = mu.appr(iTime, time, 0.5);
-    iDie = mu.appr(iDie, die, 0.5);
+    iTime = mu.appr(iTime, time, time / 90);
+    iDie = mu.appr(iDie, die, die / 90);
 
     if (e.p.any) {
       play.beginLevels();

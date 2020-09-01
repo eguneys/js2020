@@ -1,4 +1,4 @@
-export const vMax = 4;
+export const vMax = 3.3;
 export const tMax = 15;
 
 export const hMax = 16 * 3;

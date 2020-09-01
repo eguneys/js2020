@@ -28,8 +28,8 @@ export default function Play(ctx) {
   };
 
   this.init = () => {
-    endgame.init(stats);
-    scene = endgame;
+    // endgame.init(stats);
+    scene = intro;
   };
 
   this.beginIntro = () => {

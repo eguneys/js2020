@@ -22,6 +22,7 @@ There is wall jumping. And jump grace where you can still jump a few frames afte
 A series of tutorials I wrote before this game:
     [How to make a 2D platformer](https://github.com/eguneys/celeste-jumping) (in PICO-8). Explains physics, collision detection, etc. I used in this game.
 
+See [design document for Coler](DRAFT.md).
 
 To run in development:
 

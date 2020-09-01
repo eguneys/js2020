@@ -70,19 +70,36 @@
        - level 4-5+
 
     Day 11
-        - endgame all clear
-          - sfx X
-          - animation
-        - hud
+        - hud+
           - death
           - time
 
     Day 12
-        - art refinement-
-        - level refinement-
+        - endgame all clear
+          - sfx X
+          - animation
+        - refinement-
+          - art
+          - level
+          - mechanics
     
 
 ### TO DO
+
+    - Endgame
+      - 3 Achievement Medals
+        Die stats
+          %1 Gold
+          %30 Silver
+          %60 Bronze
+          %60+ Rainbow
+        - Show other medals behind
+      - Different Progress colors
+
+    - Screen sparkle animation 8x8 
+        covers whole square screen
+
+    - Go to endgame after last collectible
 
 
     8 guides
@@ -122,16 +139,16 @@
 
     Spider throwing web before attack ?
 
-    Stats hud bar
+    Stats hud bar+
         die
         time
-        collectibles
+        collectibles X
 
     Decals+
 
     Extra Hard levels X
 
-    Basic Sound Synthesis X
+    Basic Sound Synthesis +
 
 ### Schedule
 
