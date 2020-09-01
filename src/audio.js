@@ -9,10 +9,6 @@ export default function Audio() {
 
   const sounds = {};
 
-  const addSound = (name, buffer) => {
-    sounds[name] = buffer;
-  };
-
   this.generate = (data) => {
 
     data.forEach((o, i) => {
@@ -22,7 +18,7 @@ export default function Audio() {
         if (generator.generate() === 1) {
           let wave = generator.createWave().buffer;
           ctx.decodeAudioData(wave, buffer => {
-            addSound(i, buffer);
+            sounds[i] = buffer;
           });
         } else {      
           setTimeout(step, 0);

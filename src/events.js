@@ -1,5 +1,7 @@
 export default function Events() {
 
+  let allCodes = ['ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown', 'KeyX', 'KeyC', 'Enter'];
+
   let allKeys = ['up', 'left', 'right', 'down', 'x', 'c', 'enter'];
 
   this.p = {};
@@ -27,55 +29,17 @@ export default function Events() {
     this[key] = false;
   };
 
-  const onKeyDown = e => {
-    switch (e.code) {
-    case 'ArrowUp':
-      pressKey('up');
-      break;
-    case 'ArrowDown':
-      pressKey('down');
-      break;
-    case 'ArrowLeft':
-      pressKey('left');
-      break;
-    case 'ArrowRight':
-      pressKey('right');
-      break;
-    case 'KeyX':
-      pressKey('x');
-      break;
-    case 'KeyC':
-      pressKey('c');
-      break;
-    case 'Enter':
-      pressKey('enter');
+  const makeDo = fn => e => {
+    let i = allCodes.indexOf(e.code);
+
+    if (i >= 0) {
+      fn(allKeys[i]);
     }
   };
 
-  const onKeyUp = e => {
-    switch (e.code) {
-    case 'ArrowUp':
-      releaseKey('up');
-      break;
-    case 'ArrowDown':
-      releaseKey('down');
-      break;
-    case 'ArrowLeft':
-      releaseKey('left');
-      break;
-    case 'ArrowRight':
-      releaseKey('right');
-      break;
-    case 'KeyX':
-      releaseKey('x');
-      break;
-    case 'KeyC':
-      releaseKey('c');
-      break;
-    case 'Enter':
-      releaseKey('enter');
-    }    
-  };
+  const onKeyDown = makeDo(pressKey);
+
+  const onKeyUp = makeDo(releaseKey);
 
 
   this.bind = () => {
