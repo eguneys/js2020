@@ -270,9 +270,12 @@ export default function Board(play, ctx) {
     destroyObject(p);
     initDelay = 30;
     shake();
+    play.die();
   };
   
   this.update = () => {
+
+    play.time();
 
     if (inputDown < 20) {
       if (e.down) {

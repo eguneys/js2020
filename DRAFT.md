@@ -73,10 +73,13 @@
         - endgame all clear
           - sfx X
           - animation
+        - hud
+          - death
+          - time
 
     Day 12
-        - art refinement
-        - level refinement
+        - art refinement-
+        - level refinement-
     
 
 ### TO DO

@@ -22,11 +22,14 @@ export default function Play(ctx) {
 
   let stats = {
     current: 0,
-    colls: []
+    colls: [],
+    die: 0,
+    time: 0
   };
 
   this.init = () => {
-    scene = intro;
+    endgame.init(stats);
+    scene = endgame;
   };
 
   this.beginIntro = () => {
@@ -46,6 +49,7 @@ export default function Play(ctx) {
     if (stats.current === 4) {
       transition.init(() => {
         stats.current = 0;
+        endgame.init(stats);
         scene = endgame;
       });
     } else {
@@ -81,11 +85,20 @@ export default function Play(ctx) {
     endgame.collect(info[0]);
   };
 
+  this.die = () => {
+    stats.die++;
+  };
+
+  this.time = () => {
+    stats.time += 1/60;
+  };
+
   this.update = () => {
     timer++;
 
     if (e.p.enter) {
       transition.init(() => {
+        endgame.init(stats);
         scene = endgame;
       });
     }
