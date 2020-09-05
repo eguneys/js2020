@@ -77,7 +77,7 @@ export default function Player(play, ctx) {
       }
     }
 
-    if (p.y >= 512 - 32) {
+    if (p.y >= 512 - 64) {
       if (p.x < 0) {
         play.prevLevel(this);
         return;

@@ -27,6 +27,7 @@ export default {
   113: [8, 56], // collectable 3
   117: [40, 56], // collectable 4
   129: [8, 64],  // collectable 2
+  206: [112, 96],
 };
 
 export const decals = {

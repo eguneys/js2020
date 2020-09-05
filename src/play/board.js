@@ -75,6 +75,10 @@ export default function Board(play, ctx) {
     return new types.BgDrop(this, ctx);
   });
 
+  let pGrass = new Pool(() => {
+    return new types.Grass(this, ctx);
+  });
+
   const poolMap = {
     0: pPlayer,
     20: pFallBlock,
@@ -87,7 +91,8 @@ export default function Board(play, ctx) {
     113: pCollect3,
     117: pCollect4,
     129: pCollect2,
-    64: pSpider
+    64: pSpider,
+    206: pGrass
   };
 
   let t = 0;
@@ -252,7 +257,7 @@ export default function Board(play, ctx) {
         if (j < 30 && Math.random() < 0.3) {
           
           let sd = map.mget(i, j + 1, 1);
-          if ((s === 33 || s === 36 || s === 49 || s === 52) && sd === -1) {
+          if ((s === 33 || s === 36 || s === 49 || s === 52) && sd === 1) {
             initObject(pBgDrop, i * 16, (j + 1) * 16); 
           }
         }

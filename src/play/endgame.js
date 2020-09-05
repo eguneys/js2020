@@ -32,8 +32,8 @@ export default function EndGame(play, ctx) {
   let t = 0;
 
   // seconds
-  let maxTime = 447,
-      maxDie = 53;
+  let maxTime = 1038,
+      maxDie = 120;
   let maxCollects = 12;
 
   let time,
