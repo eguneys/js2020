@@ -275,6 +275,10 @@ export default function Board(play, ctx) {
   
   this.update = () => {
 
+    if (e.p.enter) {
+      play.beginEndgame();
+    }
+
     play.time();
 
     if (inputDown < 20) {

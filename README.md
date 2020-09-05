@@ -11,9 +11,12 @@ Play live at [JS13K entries]().
 Controls:
 
 `Left Right` to move.
+
 `Down` to look down.
+
 `X` to jump.
-`Enter` to see status codes.
+
+`Enter` to see progress.
 
 There are 5 levels, and 12 collectibles.
 
@@ -33,5 +36,7 @@ To run in development:
 ### Made in
 
   Levels [OGMO Editor](https://ogmo-editor-3.github.io/).
+
   Sounds [Sound Box](https://sb.bitsnbites.eu/).
+
   Assets [Aseprite](https://www.aseprite.org/).

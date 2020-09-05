@@ -21,15 +21,24 @@ export default function Play(ctx) {
   g.fill('#1d2b53');
 
   let stats = {
-    current: 0,
+    current: 1,
     colls: [],
     die: 0,
     time: 0
   };
 
   this.init = () => {
-    // endgame.init(stats);
+    endgame.init(stats);
+    scene = endgame;
+
     scene = intro;
+  };
+
+  this.beginEndgame = () => {
+    transition.init(() => {
+      endgame.init(stats);
+      scene = endgame;
+    });
   };
 
   this.beginIntro = () => {
@@ -81,8 +90,16 @@ export default function Play(ctx) {
   };
 
   this.collect = (info) => {
+    if (!this.scollect(info)) {
+      return;
+    }
     stats.colls.push(info);
     endgame.collect(info[0]);
+
+    if (stats.colls.length === 12) {
+      endgame.init(stats);
+      scene = endgame;
+    }
   };
 
   this.die = () => {
@@ -95,13 +112,6 @@ export default function Play(ctx) {
 
   this.update = () => {
     timer++;
-
-    if (e.p.enter) {
-      transition.init(() => {
-        endgame.init(stats);
-        scene = endgame;
-      });
-    }
 
     transition.update();
     scene.update();

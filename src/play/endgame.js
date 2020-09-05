@@ -26,22 +26,44 @@ export default function EndGame(play, ctx) {
     0, 0, 0
   ];
 
+  let spint = 0;
+  let spina = 0;
+
   let t = 0;
 
   // seconds
   let maxTime = 447,
       maxDie = 53;
+  let maxCollects = 12;
 
   let time,
       die,
       iTime,
       iDie;
 
+  let coinWait,
+      coinSpin,
+      fadeOut,
+      thanks;
+      
+
   this.init = (stats) => {
+    t = 0;
+
     iTime = 0;
     iDie = 0;
     time = stats.time;
     die = stats.die;
+
+    coinWait = 
+      stats.colls.length === maxCollects ?
+      60:0;
+
+    coinSpin = 0;
+    fadeOut = 0;
+    thanks = 0;
+
+    spina = 10;
 
     console.log(`Time: ${Math.floor(time)}, Die: ${die}`);
   };
@@ -64,11 +86,47 @@ export default function EndGame(play, ctx) {
     iTime = mu.appr(iTime, time, time / 90);
     iDie = mu.appr(iDie, die, die / 90);
 
-    if (e.p.any) {
+    if (coinWait > 0) {
+      coinWait--;
+      if (coinWait <= 0) {
+        coinSpin = 60;
+      }
+    }
+
+    if (coinSpin > 0) {
+      coinSpin--;
+
+      if (coinSpin <= 0) {
+        fadeOut = 20;
+      }
+    }
+
+    if (fadeOut > 0) {
+      fadeOut--;
+      if (fadeOut <= 0) {
+        thanks = 800;
+      }
+    }
+
+    if (thanks > 0) {
+      thanks--;
+    }
+
+    if (coinSpin > 0 || fadeOut > 0) {
+      spint += spina;
+      spina = mu.appr(spina, 1, 0.1);
+    } else if (thanks > 0) {
+      spint += spina;
+      spina = mu.appr(spina, 0, 0.1);
+      spint = mu.appr(spint, 0, 1);
+    }
+
+    if (e.p.enter || (e.p.any && t > 60)) {
       play.beginLevels();
     }
   };
 
+  // https://stackoverflow.com/a/63690282/3994249
   function barT(t) {
     function allocate(t, min) {
       return t <= min ? 0 : 
@@ -140,6 +198,32 @@ export default function EndGame(play, ctx) {
     g.sspr(bO + 24, 88, 8, 8, 240, 24 + 32, 32, 32);
     g.sspr(bO + 32, 88, 8, 8, 240, 24 + 64, 32, 32);
 
+    if (fadeOut > 0 || thanks > 0) {
+      for (let i = 0; i < 320 / 8; i++) {
+        for (let j = 0; j < 180 / 8; j++) {
+          let si = 
+              Math.floor((1.0 - fadeOut / 60) * 2) * 8;
+          g.sspr(48 + si, 40, 8, 8, 
+                 i*8, j*8);
+        }
+      }
+    }
+
+    if (thanks > 0) {
+      g.sspr(80, 24, 48, 8, 160 - 96, 128, 192, 32);
+    }
+
+
+    if (coinSpin > 0 || 
+        fadeOut > 0 || 
+        thanks > 0) {
+
+      g.sspr(32 + 
+             Math.floor((spint % 30 / 30) * 5) * 16, 
+             96, 16, 16, 
+             128, 58 + Math.sin(t % 48 / 48 * Math.PI * 2) * 4, 64, 64);
+
+    }
   };
 
 }

@@ -81,26 +81,37 @@
         - refinement-
           - art
           - level
+            - level 4 nerf beginning spikes
           - mechanics
     
 
 ### TO DO
 
-    - Endgame
-      - 3 Achievement Medals
-        Die stats
-          %1 Gold
-          %30 Silver
-          %60 Bronze
-          %60+ Rainbow
-        - Show other medals behind
-      - Different Progress colors
+    - Start at level 2
 
-    - Screen sparkle animation 8x8 
+    - Transition on death X
+
+    - Endgame+
+      - 3 Achievement Medals X
+        - 2 separate categories
+          Die stats
+          Time stats
+              %1 Gold
+              %30 Silver
+              %60 Bronze
+              %60+ Rainbow
+        - Show other medals behind
+      - Different Progress colors X
+
+    - Screen sparkle animation 8x8 ?
         covers whole square screen
 
     - Go to endgame after last collectible
+      - freeze 4 frames before transition
 
+    - Fall block vanish sprite?
+
+    - Grass tiles
 
     8 guides
       right arrow
