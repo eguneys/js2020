@@ -4,7 +4,7 @@
 
 Inspired by [Celeste PICO-8](https://www.lexaloffle.com/bbs/?tid=2145). Made in 10 days.
 
-Play live at [JS13K entries]().
+Play live at [JS13K entries](https://js13kgames.com/entries/coler).
 
 [Gameplay gif](https://twitter.com/eguneys/status/1299769426644959234?s=20).
 
